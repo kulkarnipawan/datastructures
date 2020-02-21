@@ -38,6 +38,9 @@ public class BinarySearchTreeTest {
     	Assert.assertTrue(binarySearchTree.find(300));
     	System.out.println("Found 500 in tree :" + binarySearchTree.find(500));
     	
+    	int[] ab = new int[5];
+    	Arrays.asList(ab);
+    	
     	Assert.assertTrue(binarySearchTree.find(20));
     	Assert.assertTrue(binarySearchTree.find(10));
     	Assert.assertTrue(binarySearchTree.find(30));
