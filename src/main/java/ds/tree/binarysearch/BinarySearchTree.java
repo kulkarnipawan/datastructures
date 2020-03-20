@@ -3,7 +3,9 @@
  */
 package ds.tree.binarysearch;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -65,25 +67,32 @@ public class BinarySearchTree {
 	}
 	
 	private void delete(Node parent, Node node) {
+		//Node is leaf node
 		if(node.leftChild == null && node.rightChild == null) {
 			if(parent.val > node.val) {
 				parent.leftChild = null;
 			} else {
 				parent.rightChild = null;
 			}	
-		} else if(node.leftChild == null && node.rightChild != null) {
+		} 
+		//If node has no left child move the right child to its place
+		else if(node.leftChild == null && node.rightChild != null) {
 			if(parent.val > node.val) {
 				parent.leftChild = node.rightChild;
 			} else {
 				parent.rightChild = node.rightChild;
 			}
-		} else if(node.rightChild == null) {
+		} 
+		//If node has no right child move the left child to its place
+		else if(node.rightChild == null) {
 			if(parent.val > node.val) {
 				parent.leftChild = node.leftChild;
 			} else {
 				parent.rightChild = node.leftChild;
 			}
-		} else {
+		} 
+		//Move leftmost child of right child to current node and call delete on that node.
+		else {
 			Node current = node.rightChild;
 			Node prev = node;
 			while(current.leftChild != null) {
@@ -142,6 +151,48 @@ public class BinarySearchTree {
 				}
 			}
 		}		
+	}
+	
+	public List<Integer> getPreOrderList() {
+		List<Integer> list = new ArrayList<>();
+		traversePreOrder(root, list);
+		return list;
+	}
+	
+	private void traversePreOrder(Node node, List<Integer> list) {
+		if(node == null) return;
+		
+		traversePreOrder(node.leftChild, list);
+		list.add(node.val);
+		traversePreOrder(node.rightChild, list);
+	}
+	
+	public List<Integer> getInOrderList() {
+		List<Integer> list = new ArrayList<>();
+		traverseInOrder(root, list);
+		return list;
+	}
+	
+	private void traverseInOrder(Node node, List<Integer> list) {
+		if(node == null) return;
+		
+		list.add(node.val);
+		traverseInOrder(node.leftChild, list);
+		traverseInOrder(node.rightChild, list);
+	}
+
+	public List<Integer> getPostOrderList() {
+		List<Integer> list = new ArrayList<>();
+		traversePostOrder(root, list);
+		return list;
+	}
+	
+	private void traversePostOrder(Node node, List<Integer> list) {
+		if(node == null) return;
+		
+		traversePostOrder(node.rightChild, list);
+		list.add(node.val);
+		traversePostOrder(node.leftChild, list);
 	}
 
 }

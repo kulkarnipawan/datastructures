@@ -55,6 +55,10 @@ public class BinarySearchTreeTest {
     	Assert.assertFalse(binarySearchTree.delete(500));
     	Assert.assertTrue(binarySearchTree.delete(20));
     	binarySearchTree.print();
+    	
+    	System.out.println(binarySearchTree.getPreOrderList());
+    	System.out.println(binarySearchTree.getInOrderList());
+    	System.out.println(binarySearchTree.getPostOrderList());
 	}
 }
 	
